@@ -1,38 +1,58 @@
 <template>
   <div class="home">
-    <h1 class="text-center  m-auto ">Welcome to The Product Gallary</h1>
-    <div class="carousel">
+    <section class="carousel">
       <div class="carousel-images">
-        <img v-for="(image, index) in images" :key="index" :src="image" :class="{ active: currentIndex === index }"/>
+        <img
+          v-for="(image, index) in images"
+          :key="index"
+          :src="image"
+          :class="{ active: currentIndex === index }"
+        />
       </div>
+
+      <div class="carousel-overlay">
+        <h1>Welcome to The Product Gallery</h1>
+        <p>Discover your next favorite product today!</p>
+      </div>
+
       <div class="carousel-dots">
-        <span v-for="(image, index) in images" :key="index" @click="goToSlide(index)" :class="{ active: currentIndex === index }">•</span>
+        <span
+          v-for="(image, index) in images"
+          :key="index"
+          @click="goToSlide(index)"
+          :class="{ active: currentIndex === index }"
+        >•</span>
       </div>
-    </div>
-    <div class="gallery-description">
-      <h2 class="text-center">Product Gallery</h2>
-      <p>Welcome to our product gallery, the perfect place to explore a wide range of high-quality products that meet all your needs. We offer you a unique and comfortable shopping experience with a variety of categories and types, ranging from the latest electronics to stylish clothing and unique accessories.</p>
+    </section>
+
+    <section class="gallery-description">
+      <h2>Explore Our Collection</h2>
+      <p>
+        Welcome to our product gallery — the perfect place to explore a wide range of high-quality products tailored to your needs.
+      </p>
+
       <ul>
-        <li><strong>Diverse Products:</strong> Discover a variety of items, including the latest electronics, clothing, shoes, accessories, and home essentials.</li>
-        <li><strong>High Quality:</strong> We ensure to provide high-quality products from trusted brands, guaranteeing you the best shopping experience.</li>
-        <li><strong>Attractive and User-Friendly Design:</strong> The gallery is designed for easy and comfortable browsing, with options to filter results by category, price, and brand.</li>
-        <li><strong>Special Offers and Discounts:</strong> Enjoy the best deals and discounts on many products, making your shopping experience cost-effective.</li>
-        <li><strong>Detailed Images and Information:</strong> Each product includes clear images and detailed information to help you make informed purchasing decisions.</li>
+        <li><strong>Diverse Products:</strong> From electronics to clothing and accessories.</li>
+        <li><strong>High Quality:</strong> Only the best brands for a premium experience.</li>
+        <li><strong>User-Friendly Design:</strong> Smooth browsing with category, price, and brand filters.</li>
+        <li><strong>Special Offers:</strong> Enjoy amazing discounts and limited-time deals.</li>
+        <li><strong>Detailed Info:</strong> Clear product details and sharp images for confident decisions.</li>
       </ul>
-      <p>Explore now and add a new touch to your life with our fantastic products.</p>
-    </div>
+
+      <p class="cta">✨ Explore now and upgrade your lifestyle with our premium products.</p>
+    </section>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Home',
+  name: "Home",
   data() {
     return {
       images: [
-        '../images/jum1.jpg',
-        '../images/jum2.jpg',
-        '../images/jum3.jpg'
+        "/images/jum1.jpg",
+        "/images/jum2.jpg",
+        "/images/jum3.jpg"
       ],
       currentIndex: 0
     };
@@ -50,27 +70,61 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.home {
+  font-family: "Poppins", sans-serif;
+  color: #333;
+}
+
 .carousel {
   position: relative;
   width: 100%;
   overflow: hidden;
-  margin-bottom: 20px; 
+  height: 70vh;
 }
 
 .carousel-images img {
   width: 100%;
+  height: 70vh;
+  object-fit: cover;
   display: none;
+  transition: opacity 0.8s ease;
 }
 
 .carousel-images img.active {
   display: block;
+  opacity: 1;
+}
+
+.carousel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.carousel-overlay h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.carousel-overlay p {
+  font-size: 1.3rem;
+  opacity: 0.9;
 }
 
 .carousel-dots {
   text-align: center;
   position: absolute;
-  bottom: 10px;
+  bottom: 15px;
   width: 100%;
 }
 
@@ -78,31 +132,31 @@ export default {
   cursor: pointer;
   font-size: 24px;
   margin: 0 5px;
-  color: #888; 
+  color: #bbb;
 }
 
 .carousel-dots span.active {
-  color: #007bff; 
+  color: #4caf50;
 }
 
 .gallery-description {
   text-align: center;
-  margin: 20px auto;
-  padding: 20px;
-  width: 80%;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 40px auto;
+  padding: 30px;
+  width: 85%;
+  background: linear-gradient(180deg, #f9f9f9 0%, #eef7f0 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .gallery-description h2 {
-  font-size: 28px;
-  margin-bottom: 15px;
-  color: #333;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #2e7d32;
 }
 
 .gallery-description p {
-  font-size: 18px;
+  font-size: 1.1rem;
   margin-bottom: 20px;
   line-height: 1.6;
   color: #555;
@@ -111,19 +165,24 @@ export default {
 .gallery-description ul {
   list-style-type: none;
   padding: 0;
-  margin: 0;
+  margin: 0 auto 20px;
+  max-width: 700px;
+  text-align: left;
 }
 
 .gallery-description li {
-  font-size: 16px;
-  margin-bottom: 15px;
-  text-align: left;
-  max-width: 600px;
-  margin: 0 auto;
-  color: #333;
+  margin-bottom: 12px;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .gallery-description strong {
-  color: #007bff;
+  color: #4caf50;
+}
+
+.cta {
+  font-weight: 600;
+  color: #2e7d32;
+  margin-top: 10px;
 }
 </style>
